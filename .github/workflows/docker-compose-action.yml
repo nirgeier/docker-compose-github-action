@@ -1,0 +1,21 @@
+on: [push]
+
+jobs:
+  docker-compose-action:
+    runs-on: ubuntu-latest
+    name: A job to test docker-compose-action
+    steps:
+      - name: Test action
+        id: hello
+        uses: nirgeier/docker-compose-action@v1.0.0
+        with:
+          compose-file: docker-compose.yaml
+      
+      - name: Create release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Release"
+          files: dist/**
