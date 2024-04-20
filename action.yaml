@@ -1,0 +1,21 @@
+name: Docker-Compose-Github-Action
+author: Nir Geier <nirgeier@gmail.com>
+description: Docker compose action for building, running, and pushing containers
+inputs:
+  # id of input
+  compose-file:
+    description: The path of the docker compose compose-file
+    required: true
+    default: docker-compose.yaml
+  command:
+    description: The docker compose command to execute
+    required: true
+    default: build
+
+runs:
+  using: docker
+  image: Dockerfile
+
+branding:
+  icon: send
+  color: green
