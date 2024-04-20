@@ -1,0 +1,21 @@
+on: [push]
+
+jobs:
+  docker-compose-action:
+    runs-on: ubuntu-latest
+    name: A job to test docker-compose-action
+    steps:
+      - name: Release
+        uses: justincy/github-action-npm-release@2.0.2
+      - name: Build docker images
+        id: hello
+        uses: nirgeier/docker-compose-action@v1.0.0
+        with:
+          compose-file: docker-compose.yaml
+          command: build  
+      - name: Push docker images
+        uses: nirgeier/docker-compose-action@v1.0.0
+        with:
+          compose-file: docker-compose.yaml
+          command: push
+      
